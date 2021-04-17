@@ -16,9 +16,13 @@ const quizCategories = {
 function App() {
   const [inGame, setInGame] = useState(false)
 
+  const handleStart = (category) => {
+    console.log(category)
+  }
+
   return (
     <div className="container py-3">
-      {!inGame && <Menu categories={quizCategories} />}
+      {!inGame && <Menu categories={quizCategories} handleStart={handleStart} />}
     </div>
   );
 }
