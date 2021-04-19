@@ -18,21 +18,26 @@ import Answer from './Answer'
 const Questions = ({ questions }) => {
   console.log(questions)
   const questionList = questions
-  const [currentQuestion, setCurrentQuestion] = useState({ ...questionList[0], number: 1 })
+  const [currentQuestion, setCurrentQuestion] = useState({ ...questionList[0], number: 0 })
 
   const getAnswerList = (question) => {
-    const answers = [...question.incorrect_answers, question.correct_answer]
+    let answers = [...question.incorrect_answers, question.correct_answer]
     // shuffle answers
     for (let i = answers.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [answers[i], answers[j]] = [answers[j], answers[i]];
     }
+    answers = answers.map(a => ({ text: a, correct: question.correct_answer === a }))
     return answers
+  }
+
+  const handleSelectAnswer = (isCorrect) => {
+    console.log(isCorrect)
   }
 
   return (
     <div>
-      <h6>{`Question ${currentQuestion.number}:`}</h6>
+      <h6>{`Question ${currentQuestion.number + 1}:`}</h6>
       <p
         className="bg-primary rounded py-2 px-3"
         // dangerouslySetInnerHTML is used in case of html entities returned from the API
@@ -41,7 +46,11 @@ const Questions = ({ questions }) => {
       >
       </p>
       {getAnswerList(currentQuestion).map((answer, index) => (
-        <Answer key={index} answer={answer} />
+        <Answer
+          key={index}
+          text={answer.text}
+          correct={answer.correct}
+          handleSelectAnswer={handleSelectAnswer} />
       ))}
       <p>Category: {currentQuestion.category}, Difficulty: {currentQuestion.difficulty}</p>
     </div>
