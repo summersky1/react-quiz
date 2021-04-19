@@ -1,5 +1,8 @@
 import { useState } from 'react'
+import axios from 'axios';
 import Menu from "./components/Menu"
+
+const endpoint = "https://opentdb.com/api.php"
 
 // list of categories here: https://opentdb.com/api_category.php
 const quizCategories = {
@@ -16,8 +19,15 @@ const quizCategories = {
 function App() {
   const [inGame, setInGame] = useState(false)
 
-  const handleStart = (category) => {
-    console.log(category)
+  const handleStart = async (selectedCategory) => {
+    console.log(selectedCategory)
+    const response = await axios.get(endpoint, {
+      params: {
+        amount: 10,
+        category: quizCategories[selectedCategory]
+      }
+    })
+    console.log(response.data.results)
   }
 
   return (
