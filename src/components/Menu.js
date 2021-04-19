@@ -6,7 +6,6 @@ const Menu = ({ categories, handleStart }) => {
 
   return (
     <div>
-      <h2 className="text-center">React Quiz</h2>
       <h5>Choose category...</h5>
       <select
         className="custom-select"
@@ -17,10 +16,10 @@ const Menu = ({ categories, handleStart }) => {
         ))}
       </select>
 
-      <div className="text-center mt-3">
+      <div className="bg-white rounded mt-3">
         <button
           type="button"
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary btn-block"
           onClick={() => handleStart(category)}
         >
           Start quiz

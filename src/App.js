@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios';
+import "./App.css"
 import Menu from "./components/Menu"
 
 const endpoint = "https://opentdb.com/api.php"
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <div className="container py-3">
+      <h2 className="text-center">React Quiz</h2>
       {!inGame && <Menu categories={quizCategories} handleStart={handleStart} />}
     </div>
   );
