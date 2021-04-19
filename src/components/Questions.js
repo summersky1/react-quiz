@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Answer from './Answer'
 
 // Example question object
 // {
@@ -33,16 +34,7 @@ const Questions = ({ questions }) => {
     <div>
       <p className="bg-primary rounded py-2 px-3">{currentQuestion.question}</p>
       {getAnswerList(currentQuestion).map((answer, index) => (
-        <div key={index} className="bg-white rounded my-3">
-          <button
-            type="button"
-            className="btn btn-outline-primary btn-block"
-            // dangerouslySetInnerHTML is used in case of html entities returned from the API
-            // e.g. 'Rubik&rsquo;s Cube'
-            dangerouslySetInnerHTML={{ __html: `${answer}` }}
-          >
-          </button>
-        </div>
+        <Answer key={index} answer={answer} />
       ))}
       <p>Category: {currentQuestion.category}, Difficulty: {currentQuestion.difficulty}</p>
     </div>
