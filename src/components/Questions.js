@@ -18,7 +18,7 @@ import Answer from './Answer'
 const Questions = ({ questions }) => {
   console.log(questions)
   const questionList = questions
-  const [currentQuestion, setCurrentQuestion] = useState(questionList[0])
+  const [currentQuestion, setCurrentQuestion] = useState({ ...questionList[0], number: 1 })
 
   const getAnswerList = (question) => {
     const answers = [...question.incorrect_answers, question.correct_answer]
@@ -32,6 +32,7 @@ const Questions = ({ questions }) => {
 
   return (
     <div>
+      <h6>{`Question ${currentQuestion.number}:`}</h6>
       <p className="bg-primary rounded py-2 px-3">{currentQuestion.question}</p>
       {getAnswerList(currentQuestion).map((answer, index) => (
         <Answer key={index} answer={answer} />

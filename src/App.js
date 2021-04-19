@@ -23,8 +23,8 @@ function App() {
   }
 
   return (
-    <div className="container my-3">
-      <h2 className="text-center py-1">React Quiz</h2>
+    <div className="container my-4">
+      <h2 className="text-center">React Quiz</h2>
       {!inGame && <Menu handleStart={handleStart} />}
       {inGame && <Questions questions={questions} />}
     </div>
