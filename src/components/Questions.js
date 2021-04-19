@@ -33,7 +33,13 @@ const Questions = ({ questions }) => {
   return (
     <div>
       <h6>{`Question ${currentQuestion.number}:`}</h6>
-      <p className="bg-primary rounded py-2 px-3">{currentQuestion.question}</p>
+      <p
+        className="bg-primary rounded py-2 px-3"
+        // dangerouslySetInnerHTML is used in case of html entities returned from the API
+        // e.g. 'Rubik&rsquo;s Cube'
+        dangerouslySetInnerHTML={{ __html: `${currentQuestion.question}` }}
+      >
+      </p>
       {getAnswerList(currentQuestion).map((answer, index) => (
         <Answer key={index} answer={answer} />
       ))}
