@@ -19,6 +19,10 @@ const QuestionList = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState({ ...questions[0], number: 0 })
   const [numberCorrect, setNumberCorrect] = useState(0)
 
+  const generateKey = () => {
+    return Math.floor(Math.random() * 1000000)
+  }
+
   const getShuffledAnswers = () => {
     let answers = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer]
     // shuffle answers
@@ -26,18 +30,23 @@ const QuestionList = ({ questions }) => {
       const j = Math.floor(Math.random() * (i + 1));
       [answers[i], answers[j]] = [answers[j], answers[i]];
     }
+    answers = answers.map(a => ({ text: a, key: generateKey() }))
     return answers
   }
 
-  const handleCorrectAnswer = () => {
-    setNumberCorrect(numberCorrect + 1)
+  const getNextQuestion = (previousCorrect) => {
+    if (previousCorrect) {
+      setNumberCorrect(numberCorrect + 1)
+    }
+    let nextQuestionIndex = currentQuestion.number + 1
+    setCurrentQuestion({ ...questions[nextQuestionIndex], number: nextQuestionIndex })
   }
 
   return (
     <div>
       <Question
         questionDetails={{ ...currentQuestion, shuffledAnswers: getShuffledAnswers() }}
-        handleCorrectAnswer={handleCorrectAnswer}
+        getNextQuestion={getNextQuestion}
       />
     </div>
   )

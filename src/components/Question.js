@@ -1,14 +1,21 @@
 import { useState } from 'react'
 import Answer from './Answer'
 
-const Question = ({ questionDetails, handleCorrectAnswer }) => {
+const Question = ({ questionDetails, getNextQuestion }) => {
   const [showResult, setShowResult] = useState(false)
+  const [answeredCorrectly, setAnsweredCorrectly] = useState(false)
 
   const handleSelectAnswer = (isCorrect) => {
     if (isCorrect) {
-      handleCorrectAnswer()
+      setAnsweredCorrectly(true)
     }
     setShowResult(true)
+  }
+
+  const handleGetNextQuestion = () => {
+    getNextQuestion(answeredCorrectly)
+    setShowResult(false)
+    setAnsweredCorrectly(false)
   }
 
   return (
@@ -21,15 +28,24 @@ const Question = ({ questionDetails, handleCorrectAnswer }) => {
         dangerouslySetInnerHTML={{ __html: `${questionDetails.question}` }}
       >
       </p>
-      {questionDetails.shuffledAnswers.map((answer, index) => (
+      {questionDetails.shuffledAnswers.map(answer => (
         <Answer
-          key={index}
-          text={answer}
-          correct={answer === questionDetails.correct_answer}
+          key={answer.key}
+          text={answer.text}
+          correct={answer.text === questionDetails.correct_answer}
           handleSelectAnswer={handleSelectAnswer}
           showResult={showResult}
         />
       ))}
+      {showResult && (
+        <button
+          type="button"
+          className="btn btn-block btn-primary rounded-pill mb-2"
+          onClick={handleGetNextQuestion}
+        >
+          Next question
+        </button>
+      )}
       <p>Category: {questionDetails.category}, Difficulty: {questionDetails.difficulty}</p>
     </div>
   )
