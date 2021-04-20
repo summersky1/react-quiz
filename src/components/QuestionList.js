@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Question from './Question'
+import Results from './Results'
 
 // Example question object
 // {
@@ -18,6 +19,7 @@ import Question from './Question'
 const QuestionList = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState({ ...questions[0], number: 0 })
   const [numberCorrect, setNumberCorrect] = useState(0)
+  const [questionsComplete, setQuestionsComplete] = useState(false)
 
   const generateKey = () => {
     return Math.floor(Math.random() * 1000000)
@@ -39,15 +41,27 @@ const QuestionList = ({ questions }) => {
       setNumberCorrect(numberCorrect + 1)
     }
     let nextQuestionIndex = currentQuestion.number + 1
-    setCurrentQuestion({ ...questions[nextQuestionIndex], number: nextQuestionIndex })
+    if (questions.length === nextQuestionIndex) {
+      setQuestionsComplete(true)
+    } else {
+      setCurrentQuestion({ ...questions[nextQuestionIndex], number: nextQuestionIndex })
+    }
   }
 
   return (
     <div>
-      <Question
-        questionDetails={{ ...currentQuestion, shuffledAnswers: getShuffledAnswers() }}
-        getNextQuestion={getNextQuestion}
-      />
+      { !questionsComplete && (
+        <Question
+          questionDetails={{ ...currentQuestion, shuffledAnswers: getShuffledAnswers() }}
+          getNextQuestion={getNextQuestion}
+        />
+      )}
+      { questionsComplete && (
+        <Results
+          numberOfQuestions={questions.length}
+          numberCorrect={numberCorrect}
+        />
+      )}
     </div>
   )
 }
