@@ -17,6 +17,7 @@ import Question from './Question'
 
 const QuestionList = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState({ ...questions[0], number: 0 })
+  const [numberCorrect, setNumberCorrect] = useState(0)
 
   const getShuffledAnswers = () => {
     let answers = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer]
@@ -28,9 +29,16 @@ const QuestionList = ({ questions }) => {
     return answers
   }
 
+  const handleCorrectAnswer = () => {
+    setNumberCorrect(numberCorrect + 1)
+  }
+
   return (
     <div>
-      <Question questionDetails={{ ...currentQuestion, shuffledAnswers: getShuffledAnswers() }} />
+      <Question
+        questionDetails={{ ...currentQuestion, shuffledAnswers: getShuffledAnswers() }}
+        handleCorrectAnswer={handleCorrectAnswer}
+      />
     </div>
   )
 }

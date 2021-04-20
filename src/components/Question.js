@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import Answer from './Answer'
 
-const Question = ({ questionDetails }) => {
+const Question = ({ questionDetails, handleCorrectAnswer }) => {
   const [showResult, setShowResult] = useState(false)
 
   const handleSelectAnswer = (isCorrect) => {
-    console.log(isCorrect)
+    if (isCorrect) {
+      handleCorrectAnswer()
+    }
     setShowResult(true)
   }
 
