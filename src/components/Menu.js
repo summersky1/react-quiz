@@ -45,10 +45,10 @@ const Menu = ({ handleStart }) => {
         ))}
       </select>
 
-      <div className="bg-white rounded mt-4">
+      <div className="bg-white rounded-pill mt-4">
         <button
           type="button"
-          className="btn btn-outline-primary btn-block"
+          className="btn btn-block btn-outline-primary rounded-pill"
           onClick={() => handleStart(categories[category], difficulty)}
         >
           Start quiz

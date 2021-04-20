@@ -25,10 +25,10 @@ const Answer = ({ text, correct, handleSelectAnswer, showResult }) => {
   }
 
   return (
-    <div className="bg-white rounded my-3">
+    <div className="bg-white rounded-pill my-3">
       <button
         type="button"
-        className={`btn btn-block ${determineButtonClass()}`}
+        className={`btn btn-block rounded-pill ${determineButtonClass()}`}
         dangerouslySetInnerHTML={{ __html: `${text}` }}
         onClick={handleClick}
         disabled={showResult && !clicked}
