@@ -2,13 +2,13 @@ import { useState } from 'react'
 import axios from 'axios';
 import "./App.css"
 import Menu from "./components/Menu"
-import Questions from './components/Questions';
+import QuestionList from './components/QuestionList';
 
 const endpoint = "https://opentdb.com/api.php"
 
 function App() {
   const [inGame, setInGame] = useState(false)
-  const [questions, setQuestions] = useState([])
+  const [questionList, setQuestionList] = useState([])
 
   const handleStart = async (categoryId, selectedDifficulty) => {
     const response = await axios.get(endpoint, {
@@ -18,7 +18,7 @@ function App() {
         difficulty: selectedDifficulty.toLowerCase()
       }
     })
-    setQuestions(response.data.results)
+    setQuestionList(response.data.results)
     setInGame(true)
   }
 
@@ -26,7 +26,7 @@ function App() {
     <div className="container my-4">
       <h2 className="text-center">React Quiz</h2>
       {!inGame && <Menu handleStart={handleStart} />}
-      {inGame && <Questions questions={questions} />}
+      {inGame && <QuestionList questions={questionList} />}
     </div>
   );
 }
