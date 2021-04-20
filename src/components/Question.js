@@ -1,8 +1,12 @@
+import { useState } from 'react'
 import Answer from './Answer'
 
 const Question = ({ questionDetails }) => {
+  const [showResult, setShowResult] = useState(false)
+
   const handleSelectAnswer = (isCorrect) => {
     console.log(isCorrect)
+    setShowResult(true)
   }
 
   return (
@@ -21,6 +25,7 @@ const Question = ({ questionDetails }) => {
           text={answer}
           correct={answer === questionDetails.correct_answer}
           handleSelectAnswer={handleSelectAnswer}
+          showResult={showResult}
         />
       ))}
       <p>Category: {questionDetails.category}, Difficulty: {questionDetails.difficulty}</p>
