@@ -1,4 +1,4 @@
-const Results = ({ numberOfQuestions, numberCorrect }) => {
+const Results = ({ numberOfQuestions, numberCorrect, handlePlayAgain }) => {
   return (
     <div className="text-center border rounded-lg my-4">
       <h4 className="my-3">Thanks for playing!</h4>
@@ -8,6 +8,7 @@ const Results = ({ numberOfQuestions, numberCorrect }) => {
         <button
           type="button"
           className="btn btn-block btn-outline-primary rounded-pill"
+          onClick={handlePlayAgain}
         >
           Play again!
         </button>

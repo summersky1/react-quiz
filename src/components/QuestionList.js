@@ -16,7 +16,7 @@ import Results from './Results'
 //     ]
 // }
 
-const QuestionList = ({ questions }) => {
+const QuestionList = ({ questions, handlePlayAgain }) => {
   const [currentQuestion, setCurrentQuestion] = useState({ ...questions[0], number: 0 })
   const [numberCorrect, setNumberCorrect] = useState(0)
   const [questionsComplete, setQuestionsComplete] = useState(false)
@@ -60,6 +60,7 @@ const QuestionList = ({ questions }) => {
         <Results
           numberOfQuestions={questions.length}
           numberCorrect={numberCorrect}
+          handlePlayAgain={handlePlayAgain}
         />
       )}
     </div>

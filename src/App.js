@@ -22,11 +22,16 @@ function App() {
     setInGame(true)
   }
 
+  const handlePlayAgain = () => {
+    setInGame(false)
+    setQuestionList([])
+  }
+
   return (
     <div className="container my-4">
       <h2 className="text-center">React Quiz</h2>
       {!inGame && <Menu handleStart={handleStart} />}
-      {inGame && <QuestionList questions={questionList} />}
+      {inGame && <QuestionList questions={questionList} handlePlayAgain={handlePlayAgain} />}
     </div>
   );
 }
