@@ -25,6 +25,7 @@ const Menu = ({ handleStart }) => {
 
   return (
     <div>
+      {/* Category selection */}
       <h6>Choose category...</h6>
       <select
         className="custom-select"
@@ -35,6 +36,7 @@ const Menu = ({ handleStart }) => {
         ))}
       </select>
 
+      {/* Difficulty selection */}
       <h6 className="mt-3">Choose difficulty...</h6>
       <select
         className="custom-select"
@@ -45,7 +47,8 @@ const Menu = ({ handleStart }) => {
         ))}
       </select>
 
-      <div className="bg-white rounded-pill mt-4">
+      {/* Start button */}
+      <div className="bg-white rounded-pill my-4">
         <button
           type="button"
           className="btn btn-block btn-outline-primary rounded-pill"
@@ -54,6 +57,16 @@ const Menu = ({ handleStart }) => {
           Start quiz
         </button>
       </div>
+
+      {/* About info */}
+      <p className="text-center bg-white text-dark rounded px-3 py-1">
+        Source code is&nbsp;
+        <a href="https://github.com/summersky1/react-quiz" target="_blank" rel="noreferrer">here</a>
+        , questions from&nbsp;
+        <a href="https://opentdb.com/" target="_blank" rel="noreferrer">
+          Open Trivia Database
+        </a>
+      </p>
     </div>
   )
 }
