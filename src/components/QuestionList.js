@@ -17,7 +17,7 @@ import Results from './Results'
 // }
 
 const QuestionList = ({ questions, handlePlayAgain }) => {
-  const [currentQuestion, setCurrentQuestion] = useState({ ...questions[0], number: 0 })
+  const [currentQuestion, setCurrentQuestion] = useState({ ...questions[0], index: 0, total: questions.length })
   const [numberCorrect, setNumberCorrect] = useState(0)
   const [questionsComplete, setQuestionsComplete] = useState(false)
 
@@ -40,11 +40,11 @@ const QuestionList = ({ questions, handlePlayAgain }) => {
     if (previousCorrect) {
       setNumberCorrect(numberCorrect + 1)
     }
-    let nextQuestionIndex = currentQuestion.number + 1
+    let nextQuestionIndex = currentQuestion.index + 1
     if (questions.length === nextQuestionIndex) {
       setQuestionsComplete(true)
     } else {
-      setCurrentQuestion({ ...questions[nextQuestionIndex], number: nextQuestionIndex })
+      setCurrentQuestion({ ...questions[nextQuestionIndex], index: nextQuestionIndex, total: questions.length })
     }
   }
 

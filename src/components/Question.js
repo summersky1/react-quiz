@@ -20,7 +20,7 @@ const Question = ({ questionDetails, getNextQuestion }) => {
 
   return (
     <div className={!showResult ? "animate__animated animate__fadeIn animate__fast" : ""}>
-      <h6>{`Question ${questionDetails.number + 1}:`}</h6>
+      <h6>{`Question ${questionDetails.index + 1}:`}</h6>
       <p
         className="bg-primary rounded py-2 px-3"
         // dangerouslySetInnerHTML is used in case of html entities returned from the API
@@ -43,7 +43,7 @@ const Question = ({ questionDetails, getNextQuestion }) => {
           className="btn btn-block btn-primary rounded-pill mb-2"
           onClick={handleGetNextQuestion}
         >
-          Next question
+          {(questionDetails.index + 1) === questionDetails.total ? "Show final score..." : "Next question..."}
         </button>
       )}
       <p>Category: {questionDetails.category}, Difficulty: {questionDetails.difficulty}</p>
