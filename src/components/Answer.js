@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 
 const Answer = ({ text, correct, handleSelectAnswer, showResult }) => {
   const [clicked, setClicked] = useState(false)
@@ -36,6 +37,13 @@ const Answer = ({ text, correct, handleSelectAnswer, showResult }) => {
       </button>
     </div>
   )
+}
+
+Answer.propTypes = {
+  text: PropTypes.string,
+  correct: PropTypes.bool,
+  handleSelectAnswer: PropTypes.func,
+  showResult: PropTypes.bool,
 }
 
 export default Answer

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const Results = ({ numberOfQuestions, numberCorrect, handlePlayAgain }) => {
   const getResultsMessage = () => {
     const percent = numberCorrect / numberOfQuestions * 100
@@ -29,6 +31,12 @@ const Results = ({ numberOfQuestions, numberCorrect, handlePlayAgain }) => {
       </div>
     </div>
   )
+}
+
+Results.propTypes = {
+  numberOfQuestions: PropTypes.number,
+  numberCorrect: PropTypes.number,
+  handlePlayAgain: PropTypes.func,
 }
 
 export default Results

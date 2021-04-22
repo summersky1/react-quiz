@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Answer from './Answer'
+import PropTypes from 'prop-types'
 
 const Question = ({ questionDetails, getNextQuestion }) => {
   const [showResult, setShowResult] = useState(false)
@@ -49,6 +50,11 @@ const Question = ({ questionDetails, getNextQuestion }) => {
       <p>Category: {questionDetails.category}, Difficulty: {questionDetails.difficulty}</p>
     </div>
   )
+}
+
+Question.propTypes = {
+  questionDetails: PropTypes.object,
+  getNextQuestion: PropTypes.func,
 }
 
 export default Question

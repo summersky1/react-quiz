@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Question from './Question'
 import Results from './Results'
+import PropTypes from 'prop-types'
 
 // Example question object
 // {
@@ -65,6 +66,11 @@ const QuestionList = ({ questions, handlePlayAgain }) => {
       )}
     </div>
   )
+}
+
+QuestionList.propTypes = {
+  questions: PropTypes.array,
+  handlePlayAgain: PropTypes.func,
 }
 
 export default QuestionList

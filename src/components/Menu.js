@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 
 // list of categories here: https://opentdb.com/api_category.php
 const categories = {
@@ -69,6 +70,10 @@ const Menu = ({ handleStart }) => {
       </p>
     </div>
   )
+}
+
+Menu.propTypes = {
+  handleStart: PropTypes.func,
 }
 
 export default Menu
