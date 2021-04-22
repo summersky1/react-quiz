@@ -28,7 +28,7 @@ function App() {
   }
 
   return (
-    <div className="container my-4">
+    <div className="container py-4">
       <h2 className="text-center">React Quiz</h2>
       {!inGame && <Menu handleStart={handleStart} />}
       {inGame && <QuestionList questions={questionList} handlePlayAgain={handlePlayAgain} />}

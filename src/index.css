@@ -5,8 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: deepskyblue;
+  background: linear-gradient(0deg, rgb(33, 117, 168) 0%, rgb(34, 200, 255) 100%);
   color: white;
+}
+
+/* needed for background to cover page */
+html {
+  height: 100%;
 }
 
 code {
