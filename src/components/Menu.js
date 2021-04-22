@@ -12,28 +12,41 @@ const difficulties = [
 
 const Menu = ({ handleStart }) => {
   const [categories, setCategories] = useState({})
-  const [selectedCategory, setSelectedCategory] = useState({})
+  const [genreList, setGenreList] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState("")
   const [selectedDifficulty, setSelectedDifficulty] = useState(difficulties[0])
 
   useEffect(() => {
-    const fetchCategories = async () => {
+    const fetchCategoriesFromApi = async () => {
       const response = await axios.get(categoryEndpoint)
       const categoryListRaw = response.data.trivia_categories
       const categoriesWithGenre = {}
+      const genreSet = new Set()
       categoryListRaw.forEach(c => {
         if (!c.name.includes(":")) {
-          c.name = "Other: " + c.name
+          c.name = "Miscellaneous: " + c.name
         }
         const categoryElements = c.name.split(':')
         const genre = categoryElements[0]
         const name = categoryElements[1].trim()
         categoriesWithGenre[name] = ({ id: c.id, genre: genre })
+        genreSet.add(genre)
       });
       setCategories(categoriesWithGenre)
-      setSelectedCategory(Object.keys(categoriesWithGenre)[0])
+      setGenreList(Array.from(genreSet))
     }
-    fetchCategories()
+    fetchCategoriesFromApi()
   }, [])
+
+  const getCategoriesInGenre = (genre) => {
+    const categoriesForGenre = []
+    Object.entries(categories).forEach(([name, info]) => {
+      if (info.genre === genre) {
+        categoriesForGenre.push({ name, id: info.id })
+      }
+    })
+    return categoriesForGenre
+  }
 
   return (
     <div>
@@ -43,8 +56,12 @@ const Menu = ({ handleStart }) => {
         className="custom-select shadow-sm"
         onChange={(event) => setSelectedCategory(event.target.value)}
       >
-        {Object.entries(categories).map(([name, info]) => (
-          <option key={info.id}>{name}</option>
+        {genreList.map(genre => (
+          <optgroup key={genre} label={" " + genre}>
+            {getCategoriesInGenre(genre).map(c => (
+              <option key={c.id}>{c.name}</option>
+            ))}
+          </optgroup>
         ))}
       </select>
 
