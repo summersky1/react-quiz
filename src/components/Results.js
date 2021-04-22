@@ -20,7 +20,7 @@ const Results = ({ numberOfQuestions, numberCorrect, handlePlayAgain }) => {
       <h4>Final score:</h4>
       <h1>{numberCorrect}/{numberOfQuestions}</h1>
       <h4>{getResultsMessage()}</h4>
-      <div className="bg-white rounded-pill mx-5 my-4">
+      <div className="bg-white rounded-pill shadow-sm mx-5 my-4">
         <button
           type="button"
           className="btn btn-block btn-outline-primary rounded-pill"

@@ -29,7 +29,7 @@ const Menu = ({ handleStart }) => {
       {/* Category selection */}
       <h6>Choose category...</h6>
       <select
-        className="custom-select"
+        className="custom-select shadow-sm"
         onChange={(event) => setCategory(event.target.value)}
       >
         {Object.entries(categories).map(([name, id]) => (
@@ -40,7 +40,7 @@ const Menu = ({ handleStart }) => {
       {/* Difficulty selection */}
       <h6 className="mt-3">Choose difficulty...</h6>
       <select
-        className="custom-select"
+        className="custom-select shadow-sm"
         onChange={(event) => setDifficulty(event.target.value)}
       >
         {difficulties.map((diff, index) => (
@@ -49,7 +49,7 @@ const Menu = ({ handleStart }) => {
       </select>
 
       {/* Start button */}
-      <div className="bg-white rounded-pill my-4">
+      <div className="bg-white rounded-pill shadow-sm my-4">
         <button
           type="button"
           className="btn btn-block btn-outline-primary rounded-pill"

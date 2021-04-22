@@ -41,7 +41,7 @@ const Question = ({ questionDetails, getNextQuestion }) => {
       {showResult && (
         <button
           type="button"
-          className="btn btn-block btn-primary rounded-pill mb-2"
+          className="btn btn-block btn-primary rounded-pill shadow-sm mb-2"
           onClick={handleGetNextQuestion}
         >
           {(questionDetails.index + 1) === questionDetails.total ? "Show final score..." : "Next question..."}
