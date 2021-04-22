@@ -1,17 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios';
 import PropTypes from 'prop-types'
 
-// list of categories here: https://opentdb.com/api_category.php
-const categories = {
-  "General Knowledge": 9,
-  "Film": 11,
-  "Television": 14,
-  "Video Games": 15,
-  "Computers": 18,
-  "Geography": 22,
-  "Comics": 29,
-  "Anime and Manga": 31,
-}
+const categoryEndpoint = "https://opentdb.com/api_category.php"
 
 const difficulties = [
   "Easy",
@@ -20,9 +11,29 @@ const difficulties = [
 ]
 
 const Menu = ({ handleStart }) => {
-  // initialise to category/difficulty to first value
-  const [category, setCategory] = useState(Object.keys(categories)[0])
-  const [difficulty, setDifficulty] = useState(difficulties[0])
+  const [categories, setCategories] = useState({})
+  const [selectedCategory, setSelectedCategory] = useState({})
+  const [selectedDifficulty, setSelectedDifficulty] = useState(difficulties[0])
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const response = await axios.get(categoryEndpoint)
+      const categoryListRaw = response.data.trivia_categories
+      const categoriesWithGenre = {}
+      categoryListRaw.forEach(c => {
+        if (!c.name.includes(":")) {
+          c.name = "Other: " + c.name
+        }
+        const categoryElements = c.name.split(':')
+        const genre = categoryElements[0]
+        const name = categoryElements[1].trim()
+        categoriesWithGenre[name] = ({ id: c.id, genre: genre })
+      });
+      setCategories(categoriesWithGenre)
+      setSelectedCategory(Object.keys(categoriesWithGenre)[0])
+    }
+    fetchCategories()
+  }, [])
 
   return (
     <div>
@@ -30,10 +41,10 @@ const Menu = ({ handleStart }) => {
       <h6>Choose category...</h6>
       <select
         className="custom-select shadow-sm"
-        onChange={(event) => setCategory(event.target.value)}
+        onChange={(event) => setSelectedCategory(event.target.value)}
       >
-        {Object.entries(categories).map(([name, id]) => (
-          <option key={id}>{name}</option>
+        {Object.entries(categories).map(([name, info]) => (
+          <option key={info.id}>{name}</option>
         ))}
       </select>
 
@@ -41,7 +52,7 @@ const Menu = ({ handleStart }) => {
       <h6 className="mt-3">Choose difficulty...</h6>
       <select
         className="custom-select shadow-sm"
-        onChange={(event) => setDifficulty(event.target.value)}
+        onChange={(event) => setSelectedDifficulty(event.target.value)}
       >
         {difficulties.map((diff, index) => (
           <option key={index}>{diff}</option>
@@ -53,7 +64,7 @@ const Menu = ({ handleStart }) => {
         <button
           type="button"
           className="btn btn-block btn-outline-primary rounded-pill"
-          onClick={() => handleStart(categories[category], difficulty)}
+          onClick={() => handleStart(categories[selectedCategory].id, selectedDifficulty)}
         >
           Start quiz
         </button>

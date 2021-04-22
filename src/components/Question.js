@@ -47,7 +47,7 @@ const Question = ({ questionDetails, getNextQuestion }) => {
           {(questionDetails.index + 1) === questionDetails.total ? "Show final score..." : "Next question..."}
         </button>
       )}
-      <p>Category: {questionDetails.category}, Difficulty: {questionDetails.difficulty}</p>
+      <p>{questionDetails.category}, Difficulty: {questionDetails.difficulty}</p>
     </div>
   )
 }
