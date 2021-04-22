@@ -34,6 +34,7 @@ const Menu = ({ handleStart }) => {
       });
       setCategories(categoriesWithGenre)
       setGenreList(Array.from(genreSet))
+      setSelectedCategory(Object.keys(categoriesWithGenre)[0])
     }
     fetchCategoriesFromApi()
   }, [])
