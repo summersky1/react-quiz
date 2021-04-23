@@ -18,8 +18,13 @@ function App() {
         difficulty: selectedDifficulty.toLowerCase()
       }
     })
-    setQuestionList(response.data.results)
-    setInGame(true)
+    const fetchedQuestions = response.data.results
+    if (fetchedQuestions.length > 0) {
+      setQuestionList(fetchedQuestions)
+      setInGame(true)
+    } else {
+      alert("There are no questions for this category/difficulty combination, please choose another difficulty and/or category.")
+    }
   }
 
   const handlePlayAgain = () => {
