@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios';
 import "./App.css"
+import logo from './logo.svg';
 import Menu from "./components/Menu"
 import QuestionList from './components/QuestionList';
 
@@ -34,7 +35,10 @@ function App() {
 
   return (
     <div className="container py-4">
-      <h2 className="text-center">React Quiz</h2>
+      <div className="text-center">
+        <img src={logo} className="App-logo mt-n3 ml-n3" alt="logo" />
+        <span className="h2">React Quiz</span>
+      </div>
       {!inGame && <Menu handleStart={handleStart} />}
       {inGame && <QuestionList questions={questionList} handlePlayAgain={handlePlayAgain} />}
     </div>
