@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 .container {
     max-width: 600px;
+}
+
+.question {
+    font-family: Poppins;
 }

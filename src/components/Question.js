@@ -20,7 +20,7 @@ const Question = ({ questionDetails, getNextQuestion }) => {
   }
 
   return (
-    <div className={!showResult ? "animate__animated animate__fadeIn animate__fast" : ""}>
+    <div className={"question" + (!showResult ? " animate__animated animate__fadeIn animate__fast" : "")}>
       <h6>{`Question ${questionDetails.index + 1}:`}</h6>
       <p
         className="bg-primary rounded py-2 px-3"
